@@ -40,7 +40,7 @@ const ProgressBar = ({ sections, currentSection, onSectionChange }: ProgressBarP
               <TooltipTrigger asChild>
                 <button
                   className={`
-                    progress-dot absolute w-5 h-5 -left-1.5
+                    progress-dots absolute w-5 h-5 -left-1.5
                     rounded-full border-2 transition-all duration-300
                     hover:scale-125 hover:border-electric-blue 
                     cursor-pointer focus:outline-none

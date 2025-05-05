@@ -24,10 +24,10 @@ const AgentCard = ({ title, description, icon, details }: AgentCardProps) => {
           </div>
         </div>
         <CardTitle className="text-xl">{title}</CardTitle>
-        <CardDescription>{description}</CardDescription>
+        <CardDescription className="text-left">{description}</CardDescription>
       </CardHeader>
       <CardContent className={`transition-all overflow-hidden ${expanded ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
-        <div className="pt-2 text-sm text-gray-600">
+        <div className="pt-2 text-sm text-gray-600 text-left">
           {details}
           <AIBadge />
         </div>
