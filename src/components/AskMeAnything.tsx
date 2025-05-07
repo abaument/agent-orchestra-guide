@@ -1,88 +1,141 @@
+import { useState, useRef, useEffect, FormEvent } from "react"
+import { MessageCircle, Send, X } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import AIBadge from "@/components/AIBadge"
 
-import { useState } from 'react';
-import { MessageCircle, Send, X } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import AIBadge from './AIBadge';
-
+type Role = "user" | "assistant"
 interface Message {
-  content: string;
-  isUser: boolean;
+  content: string
+  role: Role
 }
 
-const AskMeAnything = () => {
-  const [isOpen, setIsOpen] = useState(false);
+export default function AskMeAnything() {
+  /* ───────────────── state ───────────────── */
+  const [open, setOpen] = useState(false)
   const [messages, setMessages] = useState<Message[]>([
-    { 
-      content: "Bonjour ! Je suis votre guide IA sur les systèmes multi-agents. Comment puis-je vous aider aujourd'hui ?", 
-      isUser: false 
+    {
+      content:
+        "Bonjour ! Je suis votre guide IA sur les systèmes multi‑agents. Comment puis‑je vous aider ?",
+      role: "assistant",
+    },
+  ])
+  const [input, setInput] = useState("")
+  const [loading, setLoading] = useState(false)
+  const scrollRef = useRef<HTMLDivElement>(null)
+
+  /* ───────────────── auto‑scroll ───────────────── */
+  useEffect(() => {
+    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight })
+  }, [messages])
+
+  /* ───────────────── envoi message ───────────────── */
+  async function handleSend(e: FormEvent) {
+    e.preventDefault()
+    if (!input.trim()) return
+
+    // ajoute message utilisateur
+    const next = [...messages, { content: input, role: "user" as Role }]
+    setMessages(next)
+    setInput("")
+    setLoading(true)
+
+    /* appel backend */
+    const raw = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages: next }),
+    }).catch((err) => {
+      return { ok: false, statusText: err.message } as Response
+    })
+
+    let data: any = {}
+    try {
+      data = raw.ok ? await raw.json() : {}
+    } catch {
+      /* ignore json parse error */
     }
-  ]);
-  const [input, setInput] = useState('');
+    setLoading(false)
 
-  const toggleChat = () => {
-    setIsOpen(!isOpen);
-  };
+    /* gestion erreur */
+    if (!raw.ok || data.error || !data.choices?.[0]?.message?.content) {
+      const msg =
+        data?.error?.message ||
+        `Erreur HTTP ${raw.status ?? ""} ${raw.statusText ?? ""}`.trim()
+      setMessages([
+        ...next,
+        { role: "assistant", content: `⚠️ ${msg}` },
+      ])
+      return
+    }
 
-  const handleSendMessage = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!input.trim()) return;
+    /* réponse assistant OK */
+    setMessages([
+      ...next,
+      { role: "assistant", content: data.choices[0].message.content.trim() },
+    ])
+  }
 
-    // Add user message
-    setMessages([...messages, { content: input, isUser: true }]);
-    
-    // Simulate AI response
-    setTimeout(() => {
-      const responses = [
-        "Les systèmes multi-agents (SMA) sont des systèmes composés d'agents autonomes qui interagissent entre eux pour résoudre des problèmes complexes.",
-        "Dans une architecture hiérarchique, les agents sont organisés en niveaux, avec des agents superviseurs qui coordonnent les agents de niveau inférieur.",
-        "La coordination entre agents peut se faire par divers protocoles comme le Contract Net Protocol ou les enchères distribuées.",
-        "L'un des principaux avantages des SMA est leur robustesse face aux pannes, car la défaillance d'un agent n'entraîne pas l'échec du système entier."
-      ];
-      const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-      setMessages(prev => [...prev, { content: randomResponse, isUser: false }]);
-    }, 1000);
-
-    // Clear input
-    setInput('');
-  };
-
+  /* ───────────────── UI ───────────────── */
   return (
     <>
-      <div className={`chat-container ${isOpen ? 'open' : ''}`}>
+      {/* fenêtre chat */}
+      <div className={`chat-container ${open ? "open" : ""}`}>
+        {/* header */}
         <div className="flex items-center justify-between bg-electric-blue p-4 text-white">
-          <h3 className="font-medium">Ask Me Anything</h3>
-          <button onClick={toggleChat} className="text-white hover:text-gray-200">
+          <h3 className="font-medium">Ask Me Anything</h3>
+          <button onClick={() => setOpen(false)} className="hover:text-gray-200">
             <X size={18} />
           </button>
         </div>
-        <div className="flex-1 overflow-y-auto p-4 space-y-4">
-          {messages.map((message, index) => (
-            <div key={index} className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}>
-              <div className={`max-w-[80%] rounded-lg p-3 ${message.isUser ? 'bg-electric-blue text-white' : 'bg-gray-100'}`}>
-                <p>{message.content}</p>
-                {!message.isUser && <AIBadge />}
+
+        {/* messages */}
+        <div
+          ref={scrollRef}
+          className="flex-1 space-y-4 overflow-y-auto p-4 text-sm"
+        >
+          {messages.map((m, i) => (
+            <div
+              key={i}
+              className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
+            >
+              <div
+                className={`max-w-[80%] rounded-lg p-3 ${
+                  m.role === "user"
+                    ? "bg-electric-blue text-white"
+                    : "bg-gray-100"
+                }`}
+              >
+                <p>{m.content}</p>
+                {m.role === "assistant" && <AIBadge />}
               </div>
             </div>
           ))}
+          {loading && (
+            <p className="text-gray-400">
+              Assistant tape<span className="animate-pulse">…</span>
+            </p>
+          )}
         </div>
-        <form onSubmit={handleSendMessage} className="border-t p-4 flex gap-2">
-          <Input 
-            value={input} 
-            onChange={(e) => setInput(e.target.value)} 
-            placeholder="Posez votre question..." 
+
+        {/* input */}
+        <form onSubmit={handleSend} className="flex gap-2 border-t p-4">
+          <Input
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Posez votre question…"
             className="flex-1"
           />
-          <Button type="submit" size="icon" variant="ghost">
+          <Button type="submit" size="icon" variant="ghost" disabled={loading}>
             <Send size={18} />
           </Button>
         </form>
       </div>
-      <div className="floating-button" onClick={toggleChat}>
+
+      {/* bouton flottant */}
+      <div className="floating-button" onClick={() => setOpen(true)}>
         <MessageCircle size={24} />
       </div>
     </>
-  );
-};
-
-export default AskMeAnything;
+  )
+}

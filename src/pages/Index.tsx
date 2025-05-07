@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react"
-import ReactPlayer from "react-player"
 
 import { Button } from "@/components/ui/button"
 import ProgressBar from "@/components/ProgressBar"
@@ -101,16 +100,7 @@ const Index: React.FC = () => {
                 </Button>
               </div>
               <div className="absolute inset-0">
-              <NetworkAnimation highlightColor="#FF5E5B" interval={1500}>
-                <video
-                  src="/AIexplenation.mp4"
-                  autoPlay
-                  loop
-                  playsInline
-                  className="h-full w-full object-cover"
-                />
-              </NetworkAnimation>
-
+                <NetworkAnimation />
               </div>
             </div>
             {/* CTA */}
