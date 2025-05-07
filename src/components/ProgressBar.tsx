@@ -71,20 +71,32 @@ const ProgressBar = ({ sections, currentSection, onSectionChange }: ProgressBarP
 // Fonction pour obtenir une description détaillée de chaque section
 const getTooltipDescription = (index: number): string => {
   switch (index) {
-    case 0:
-      return "Introduction aux systèmes multi-agents d'IA et présentation générale du guide";
     case 1:
-      return "Définition, caractéristiques et fonctionnalités des systèmes multi-agents en intelligence artificielle";
+      return "Vision, messages clés et recommandations.";
     case 2:
-      return "Exploration des différents types d'architectures et protocoles de communication entre agents";
+      return "Explosion des agents LLM en 2023‑2025 ; opportunités & motivations.";
     case 3:
-      return "Exemples concrets d'applications des systèmes multi-agents dans différents secteurs";
+      return "Agent vs. MAS, degrés d’autonomie, rôles (planner, critic…).";
     case 4:
-      return "Guide étape par étape pour concevoir, développer et déployer votre propre système multi-agents";
+      return "Réactive, BDI, hiérarchique, graph‑based (LangGraph), équipage (CrewAI).";
     case 5:
-      return "Considérations éthiques, sécurité et bonnes pratiques pour une implémentation responsable";
+      return "LLM (GPT‑4o, Gemini 3…), RLHF, RAG, outils, orchestration cloud/serverless.";
     case 6:
-      return "Synthèse des points clés et ressources supplémentaires pour approfondir";
+      return "Copilotes métiers, cybersécurité, robotique, simulation socio‑économique, supply‑chain.";
+    case 7:
+      return "Émergence, coordination, évaluation, scalabilité, alignement.";
+    case 8:
+      return "EU AI Act, ISO/IEC 42001, IEEE P3394, Data Act, privacy.";
+    case 9:
+      return "Attaques sybil, prompt‑injection croisée, fuite de mémoire partagée.";
+    case 10:
+      return "Productivité, emplois, redistribution de valeur, souveraineté numérique.";
+    case 11:
+      return "Agentic AI à l’échelle, gouvernance, agents physiques (robots).";
+    case 12:
+      return "Pilotage, POC, KPI, gouvernance, formation.";
+    case 13:
+      return "Testez l'IARIIG";
     default:
       return "Cliquez pour naviguer vers cette section";
   }
