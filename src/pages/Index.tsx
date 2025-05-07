@@ -43,7 +43,6 @@ const GlossaryItem: React.FC<{ term: string; children: React.ReactNode }> = ({ t
 const SECTIONS = [
   "Home",
   "Résumé exécutif",
-  "Vision, messages clés & recommandations",
   "Introduction & contexte",
   "Définitions & typologie",
   "Architectures de référence",
@@ -53,7 +52,8 @@ const SECTIONS = [
   "Cadre éthique & réglementaire",
   "Risques & cyber‑sécurité",
   "Impacts socio‑économiques",
-  "Perspectives futures (2025‑2030)",
+  "Perspectives Futures",
+  "Recommandations & Roadmap",
   "Conclusion & ouvertures",
 ] as const
 
@@ -89,8 +89,8 @@ const Index: React.FC = () => {
       {/* ───────── HERO (toujours index 0) */}
       <section ref={(el) => (sectionRefs.current[0] = el)} className="snap-section flex items-center justify-center bg-gradient-to-br from-white to-blue-50">
         <div className="container mx-auto max-w-5xl px-4 md:px-6 text-center">
-          <h1 className="mb-4 text-4xl font-bold md:text-6xl">Les multi‑agents IA</h1>
-          <p className="mb-8 text-xl text-gray-700 md:text-2xl">Orchestrer l'intelligence collective des machines</p>
+          <h1 className="mb-4 text-4xl font-bold md:text-6xl">Le Futur des Agents Multi-LLM : Vers une Intelligence Distribuée</h1>
+          <p className="mb-8 text-xl text-gray-700 md:text-2xl">Orchestrer l'intelligence collective des machines - Livre Blanc - Arthur, Michel, Antoine - IRIIG</p>
           <div className="relative mx-auto mb-12 h-64 w-full max-w-3xl overflow-hidden rounded-lg shadow-lg md:h-80">
             <div className="absolute inset-0 z-10 flex items-center justify-center bg-gray-900/30">
               <Button className="flex items-center gap-2 bg-electric-blue text-white hover:bg-electric-dark">
@@ -103,53 +103,30 @@ const Index: React.FC = () => {
       </section>
 
       {/* ───────── 1. Résumé exécutif */}
-      <section ref={(el) => (sectionRefs.current[1] = el)} className="snap-section bg-white py-12">
-        <div className="container mx-auto max-w-5xl px-4 md:px-6 space-y-6">
-          <h2 className="text-3xl font-bold">Résumé exécutif</h2>
-          <div className="grid gap-6 md:grid-cols-3">
-            {[
-              {
-                title: "Technique",
-                items: [
-                  "Passage d’agents isolés à des SMA orchestrés (LangGraph, CrewAI…)",
-                  "Séparation Planner / Critic / Tool‑Caller",
-                  "RAG + orchestration cloud/serverless pour la production",
-                ],
-              },
-              {
-                title: "Scientifique",
-                items: [
-                  "Émergence collective & planification neuronale (2023‑25)",
-                  "Nouvelles métriques coopération & alignement",
-                  "Verrous : coordination n‑agents, robustesse, scalabilité",
-                ],
-              },
-              {
-                title: "Impacts futurs",
-                items: [
-                  "Copilotes spécialisés : +20‑30 % de productivité",
-                  "Convergence IA‑robot (agents physiques)",
-                  "Souveraineté numérique & redistribution de valeur",
-                ],
-              },
-            ].map((col) => (
-              <div key={col.title}>
-                <h3 className="mb-2 font-semibold">{col.title}</h3>
-                <ul className="list-disc pl-5 space-y-1 text-sm">
-                  {col.items.map((it) => (
-                    <li key={it}>{it}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+      <section
+        ref={(el) => (sectionRefs.current[1] = el)}
+        className="snap-section bg-white py-12"
+      >
+        <div className="container mx-auto max-w-5xl px-4 md:px-6 space-y-8">
+          <h2 className="text-3xl font-bold">
+            Résumé exécutif
+          </h2>
+
+          {/* — Résumé exécutif — */}
+          <div className="space-y-4">
+            <h3 className="font-semibold text-electric-blue">Résumé exécutif</h3>
+            <p className="text-sm leading-relaxed">
+              Entre 2023 et 2025, les agents basés sur des modèles de langage (LLM)
+              sont passés d’outils isolés à des <strong>systèmes multi‑agents collaboratifs</strong>.
+              Cette évolution ouvre la voie à une coordination efficace,
+              une prise de décision distribuée et une automatisation avancée.
+              Des acteurs majeurs –  Accenture, notamment –  déploient déjà ces systèmes,
+              annonçant une adoption massive dans les prochaines années 
+              <span className="italic text-xs">(WSJ)</span>.
+            </p>
           </div>
         </div>
-      </section>
-
-      {/* ───────── 2. Vision, messages clés & recommandations */}
-      <section ref={(el) => (sectionRefs.current[2] = el)} className="snap-section bg-gray-50 py-12">
         <div className="container mx-auto max-w-5xl px-4 md:px-6 space-y-6">
-          <h2 className="text-3xl font-bold">Vision, messages clés & recommandations</h2>
           <p>
             Entre 2023 et 2025, les agents LLM ont évolué d'outils isolés vers des <strong>systèmes multi‑agents collaboratifs</strong>.
             Des acteurs majeurs comme Accenture et Google expérimentent déjà ces orchestrations à grande échelle.
@@ -162,30 +139,66 @@ const Index: React.FC = () => {
         </div>
       </section>
 
-      {/* ───────── 3. Introduction & contexte */}
-      <section ref={(el) => (sectionRefs.current[3] = el)} className="snap-section bg-white py-12">
-        <div className="container mx-auto max-w-5xl px-4 md:px-6 space-y-6">
+      {/* ───────── 2. Introduction & contexte */}
+      <section
+        ref={(el) => (sectionRefs.current[2] = el)}
+        className="snap-section bg-white py-12"
+      >
+        <div className="container mx-auto max-w-5xl px-4 md:px-6 space-y-8">
           <h2 className="text-3xl font-bold">Introduction & contexte</h2>
-          <p>L'explosion des agents LLM (2023‑2025) ouvre des opportunités inégalées : automatisation avancée, prise de décision distribuée, interfaces conversationnelles spécialisées.</p>
-          <div className="h-40 rounded-lg bg-gray-100 flex items-center justify-center text-gray-400">Frise chronologique – à illustrer</div>
+
+          {/* — Intro longue — */}
+          <p className="text-sm leading-relaxed">
+            Entre 2023 et 2025, la prolifération d’<strong>agents LLM</strong> a
+            transformé le paysage de l’IA : on passe d’assistants isolés à de
+            véritables <em>écosystèmes multi‑agents</em> capables de raisonner,
+            négocier et agir de façon coordonnée.  Cette vague crée des
+            opportunités inédites&nbsp;: automatisation fine des processus,
+            décision distribuée en temps réel, nouvelles interfaces conversationnelles
+            verticales (finance, santé, industrie).
+          </p>
+          {/* — Contexte historique — */}
+          <div className="space-y-4">
+            <h3 className="font-semibold text-electric-blue">Contexte historique</h3>
+
+            <figure className="mx-auto max-w-3xl overflow-hidden rounded-xl shadow-sm">
+              <img
+                src="/GreenCorporateTimelineInfographicPresentation.png"
+                alt="Frise chronologique des SMA"
+                className="w-full object-cover"
+              />
+              <figcaption className="bg-gray-50 p-3 text-center text-xs text-gray-600">
+                Frise chronologique simplifiée retraçant les jalons de
+                l'avènement des systèmes multi‑agents depuis 1977.
+              </figcaption>
+            </figure>
+          </div>
         </div>
       </section>
 
-      {/* ───────── 4. Définitions & typologie */}
-      <section ref={(el) => (sectionRefs.current[4] = el)} className="snap-section bg-gray-50 py-12">
+
+      {/* ───────── 3. Définitions & typologie */}
+      <section ref={(el) => (sectionRefs.current[3] = el)} className="snap-section bg-gray-50 py-12">
         <div className="container mx-auto max-w-5xl px-4 md:px-6 space-y-6">
           <h2 className="text-3xl font-bold">Définitions & typologie</h2>
-          <p>Un <strong>Système Multi‑Agents</strong> est un ensemble d’entités autonomes interagissant dans un environnement partagé pour atteindre des objectifs.</p>
+          <p>Un <strong>Système Multi‑Agents (SMA)</strong> est un ensemble d’entités
+              autonomes – logicielles ou robotiques – qui perçoivent un environnement partagé,
+              décident et agissent individuellement, tout en interagissant pour atteindre
+              leurs buts propres ou collectifs. Les notions clés : autonomie,
+              interaction asynchrone, décentralisation et <em>émergence</em>.</p>
           <div className="grid gap-4 md:grid-cols-3">
             <div className="rounded-lg bg-white p-4"><strong>Agent</strong> : perçoit, décide, agit.</div>
             <div className="rounded-lg bg-white p-4"><strong>MAS</strong> : réseau coordonné d'agents.</div>
             <div className="rounded-lg bg-white p-4"><strong>Rôles</strong> : Planner, Critic, Executor…</div>
+            <span className="block pt-1 text-[10px] text-gray-500">
+                  Sources : AIMultiple, DEV Community, arXiv, IB Formation
+                </span>
           </div>
           {/* reprise de l'ancien bloc Qu'est‑ce qu'un SMA avec cartes */}
           <div className="grid items-center gap-8 md:grid-cols-2 mt-8">
             <div>
               <p className="mb-4 text-lg">
-                Chaque agent a une vision partielle de l'environnement et agit de façon autonome. La puissance du SMA vient de l'émergence collective.
+                Chaque agent a une vision partielle de l'environnement et agit de façon autonome. La puissance du SMA vient de l'émergence collective. 
               </p>
               <div className="mb-4 rounded-lg bg-gray-100 p-4">
                 <h3 className="mb-2 font-semibold">TL;DR</h3>
@@ -203,20 +216,44 @@ const Index: React.FC = () => {
         </div>
       </section>
 
-      {/* ───────── 5. Architectures de référence */}
-      <section ref={(el) => (sectionRefs.current[5] = el)} className="snap-section bg-white py-12">
+      {/* ───────── 4. Architectures de référence */}
+      <section
+        ref={(el) => (sectionRefs.current[4] = el)}
+        className="snap-section bg-white py-12"
+      >
         <div className="container mx-auto max-w-5xl px-4 md:px-6 space-y-6">
           <h2 className="text-3xl font-bold">Architectures de référence</h2>
+
           {[
-            { title: "Réactive", text: "Décision règle‑>action, temps réel, pas de planification." },
-            { title: "BDI", text: "Belief‑Desire‑Intention : objectifs multiples justifiables." },
-            { title: "Hiérarchique", text: "Niveaux stratégique / tactique / opérationnel." },
-            { title: "Graph‑based (LangGraph)", text: "Flux contrôlé dans un graphe typé." },
-            { title: "Équipage (CrewAI)", text: "Rôles humains = agents spécialisés." },
+            {
+              title: "Réactive",
+              text:
+                "Règles « si condition ⇒ action » attachées aux capteurs ; aucune mémoire ni planification, décision en millisecondes (ex. micro‑drones d’évitement).",
+            },
+            {
+              title: "BDI",
+              text:
+                "Belief‑Desire‑Intention : l’agent maintient croyances, désirs et intentions pour adapter son plan en continu (ex. thermostat domotique intelligent).",
+            },
+            {
+              title: "Hiérarchique / holonique",
+              text:
+                "Stratégique‑tactique‑opérationnel ; reprise partielle en cas de panne du sommet (ex. flotte de robots d’entrepôt).",
+            },
+            {
+              title: "Graph‑based (LangGraph)",
+              text:
+                "Workflow sous forme de graphe typé ; exécution pas‑à‑pas, traçabilité et reprise d’état pour chatbots complexes ou pipelines RAG.",
+            },
+            {
+              title: "Équipage (CrewAI)",
+              text:
+                "Agents spécialisés orchestrés par un Manager ; mapping direct aux rôles humains (Research → Writer → Reviewer → Manager).",
+            },
           ].map((a) => (
             <div key={a.title} className="rounded-lg bg-gray-50 p-4">
               <h3 className="mb-2 font-semibold text-electric-blue">{a.title}</h3>
-              <p className="text-sm">{a.text}</p>
+              <p className="text-sm leading-relaxed">{a.text}</p>
             </div>
           ))}
 
@@ -224,20 +261,20 @@ const Index: React.FC = () => {
           <div className="rounded-xl bg-gray-50 p-4 mt-8">
             <h3 className="mb-2 font-semibold">Exemple : Contract Net Protocol</h3>
             <pre className="overflow-x-auto text-sm bg-white p-3 rounded-lg">
-# CNP pseudo‑code
-class Agent:
-    def announce_task(self, task):
-        bids = [ag.bid(task) for ag in network if ag != self]
-        winner = min(bids)
-        winner.assign(task)
+      # CNP pseudo‑code
+      class Agent:
+          def announce_task(self, task):
+              bids = [ag.bid(task) for ag in network if ag != self]
+              winner = min(bids)
+              winner.assign(task)
             </pre>
             <AIBadge />
           </div>
         </div>
       </section>
 
-      {/* ───────── 6. Technologies habilitantes */}
-      <section ref={(el) => (sectionRefs.current[6] = el)} className="snap-section bg-gray-50 py-12">
+      {/* ───────── 5. Technologies habilitantes */}
+      <section ref={(el) => (sectionRefs.current[5] = el)} className="snap-section bg-gray-50 py-12">
         <div className="container mx-auto max-w-5xl px-4 md:px-6 space-y-6">
           <h2 className="text-3xl font-bold">Technologies habilitantes</h2>
           {[
@@ -255,42 +292,53 @@ class Agent:
           {/* Ancien bloc "Concevoir son propre SMA" Steps + Frameworks */}
           <h3 className="text-2xl font-semibold mt-8">Méthodologie de conception</h3>
           <div className="flex flex-col md:flex-row gap-6">
-  {/* Colonne 1 : Liste des étapes */}
-  <ol className="space-y-2 list-decimal pl-6 text-sm md:w-1/2">
-    {[
-      "Analyse des besoins et objectifs",
-      "Définition des agents",
-      "Conception de l'environnement",
-      "Protocoles d'interaction",
-      "Implémentation et tests",
-    ].map((s) => (
-      <li key={s}>{s}</li>
-    ))}
-  </ol>
+            {/* Colonne 1 : Liste des étapes */}
+            <ol className="space-y-2 list-decimal pl-6 text-sm md:w-1/2">
+              {[
+                "Analyse des besoins et objectifs",
+                "Définition des agents",
+                "Conception de l'environnement",
+                "Protocoles d'interaction",
+                "Implémentation et tests",
+              ].map((s) => (
+                <li key={s}>{s}</li>
+              ))}
+            </ol>
 
-  {/* Colonne 2 : Frameworks */}
-  <div className="md:w-1/2">
-    <h4 className="font-semibold mb-2">Frameworks populaires</h4>
-    <div className="grid grid-cols-2 md:grid-cols-3 gap-3 text-xs">
-      {["JADE", "SPADE", "Mesa", "LangChain", "AutoGen", "CrewAI"].map((fw) => (
-        <div key={fw} className="rounded-lg border p-2 text-center bg-white">
-          {fw}
-        </div>
-      ))}
-    </div>
-  </div>
-</div>
+            {/* Colonne 2 : Frameworks */}
+            <div className="md:w-1/2">
+              <h4 className="font-semibold mb-2">Frameworks populaires</h4>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3 text-xs">
+                {["JADE", "SPADE", "Mesa", "LangChain", "AutoGen", "CrewAI"].map((fw) => (
+                  <div key={fw} className="rounded-lg border p-2 text-center bg-white">
+                    {fw}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* ───────── 7. Cas d’usage prioritaires */}
+      {/* ───────── 6. Cas d’usage prioritaires */}
       <section
-        ref={(el) => (sectionRefs.current[7] = el)}
+        ref={(el) => (sectionRefs.current[6] = el)}
         className="snap-section bg-white py-12"
       >
         <div className="container mx-auto max-w-5xl px-4 md:px-6 space-y-6">
           <h2 className="text-3xl font-bold">Cas d’usage prioritaires</h2>
-
+          <p className="text-sm leading-relaxed">
+            Les cinq exemples ci‑dessous illustrent des domaines phares, mais
+            <strong> un SMA bien conçu peut s’adapter à pratiquement tout
+            scénario où il existe plusieurs tâches ou points de décision
+            parallèles</strong> : de la gestion énergétique d’un smart‑grid à
+            l’orchestration d’équipes créatives, en passant par l’automatisation
+            d’expériences scientifiques.  Grâce à leur nature modulaire
+            (agents spécialisés + protocole de coordination), ces systèmes
+            remplacent ou augmentent <em>quasiment chaque composant
+            logiciel ou organisationnel</em> nécessitant concertation,
+            résilience et optimisation continue.
+          </p>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {[
               {
@@ -379,7 +427,12 @@ class Agent:
                       Chaque nœud optimise localement mais communique via enchères
                       pour aligner la chaîne entière (évite bull‑whip).
                     </p>
-                    <img src="/aisupply.jpeg" />
+                    <figure className="mx-auto max-w-3xl rounded-xl shadow-sm">
+                      <img
+                        src="/aisupply.jpeg"
+                        className="w-full object-cover"
+                      />
+                    </figure>
                     <p className="mt-2 text-sm">
                       Perturbation portuaire ? Un agent transport
                       propose un reroutage rail, l’agent usine recalcule le lot,
@@ -414,60 +467,72 @@ class Agent:
         </div>
       </section>
 
-
-      {/* ───────── 8. Verrous & défis scientifiques */}
+      {/* ───────── 7. Verrous & défis scientifiques */}
       <section
-        ref={(el) => (sectionRefs.current[8] = el)}
+        ref={(el) => (sectionRefs.current[7] = el)}
         className="snap-section bg-gray-50 py-12"
       >
         <div className="container mx-auto max-w-5xl px-4 md:px-6 space-y-6">
-          <h2 className="mb-6 text-3xl font-bold">Verrous & défis scientifiques</h2>
+          <h2 className="text-3xl font-bold mb-4">Verrous & défis scientifiques</h2>
 
+          {/* Intro brève */}
+          <p className="text-sm leading-relaxed mb-2">
+            Passer de prototypes d’agents isolés à des <strong>SMA déployés en
+            production</strong> soulève cinq défis majeurs : prévoir les comportements
+            émergents, synchroniser des milliers d’agents, mesurer la performance
+            multi‑critères, assurer la scalabilité temps réel et
+            <em>aligner</em> le tout avec les objectifs humains.
+          </p>
+
+          {/* Cartes */}    
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             <AgentCard
               title="Émergence"
-              description="Effets globaux inattendus"
+              description="Comportements imprévus"
               icon={<Zap className="text-electric-blue" size={24} />}
-              details="Prévoir / contrôler congestion, oscillations et stratégies détournées issues de règles locales."
+              details="Congestions spontanées, oscillations ou stratégies détour­nées apparaissent au‑delà de 500 agents. Les pistes : simulation massive + théorie des jeux pour détecter >90 % des patterns avant déploiement."
             />
             <AgentCard
               title="Coordination"
-              description="Synchroniser N agents"
+              description="Actions alignées"
               icon={<Share2 className="text-electric-blue" size={24} />}
-              details="Enchères, consensus (Paxos, Raft) ou RL multi‑agent pour aligner les actions."
+              details="Contrats (CNP), consensus Paxos/Raft ou RL multi‑agent central‑critic : objectif <100 ms pour fixer une tâche dans un réseau de 1 000 nœuds."
             />
             <AgentCard
               title="Évaluation"
-              description="Mesures multi‑facteurs"
+              description="Mesure multi‑dim"
               icon={<BarChart2 className="text-electric-blue" size={24} />}
-              details="Benchmarks SMAC / MAgent ; robustesse, équité, coût de communication."
+              details="Nouvelle grille : robustesse, équité, coût de comm. Benchmarks SMAC / MAGent révèlent jusqu’à 25 % d’instabilité entre runs."
             />
             <AgentCard
               title="Scalabilité"
-              description=">1 000 agents"
+              description="> 10³ agents"
               icon={<Layers className="text-electric-blue" size={24} />}
-              details="QMIX, GNN, hiérarchies pour garder un temps de décision constant."
+              details="Décomposition hiérarchique, factorisation QMIX, GNN : viser un temps de décision quasi‑constant malgré +10× d’agents."
             />
             <AgentCard
               title="Alignement"
-              description="Conformité humain/régulation"
+              description="Éthique & droit"
               icon={<ShieldCheck className="text-electric-blue" size={24} />}
-              details="RLHF multijoueur, contrôle embarqué, vérification formelle."
+              details="RLHF multijoueur, contrôle embarqué, preuves formelles pour bloquer 98 % des dérives identifiées en sandbox."
             />
           </div>
-          <div className="mt-4 rounded-lg bg-white p-4 text-sm">
-            <p className="mb-2 font-semibold">Trois approches majeures pour la coordination :</p>
+
+          {/* Encadré coordination */}
+          <div className="rounded-lg bg-white p-4 text-sm mt-6">
+            <p className="font-semibold mb-1">Trois leviers clés pour réussir la coordination :</p>
             <ul className="list-disc pl-5 space-y-1">
-              <li>Protocoles d'enchères / contrats (ex. CNP)</li>
-              <li>Algorithmes de consensus distribués (Paxos, Raft)</li>
-              <li>Politiques d'apprentissage multi‑agent sans supervision explicite</li>
+              <li><strong>Enchères & contrats</strong> : négocier les tâches (ex. Contract Net Protocol).</li>
+              <li><strong>Consensus distribué</strong> : décider de manière fiable même sous pannes (Paxos, Raft).</li>
+              <li><strong>Apprentissage coopératif</strong> : agents qui apprennent à coopérer sans supervision explicite (QMIX / MADDPG).</li>
             </ul>
           </div>
         </div>
       </section>
 
-      {/* ───────── 9. Cadre éthique & réglementaire */}
-      <section ref={(el) => (sectionRefs.current[9] = el)} className="snap-section bg-white py-12">
+
+      {/* ───────── 8. Cadre éthique & réglementaire */}
+      <section ref={(el) => (sectionRefs.current[8] = el)} className="snap-section bg-white py-12">
         <div className="container mx-auto max-w-5xl px-4 md:px-6 space-y-6">
           <h2 className="text-3xl font-bold">Cadre éthique & réglementaire</h2>
           <ul className="list-disc pl-5 space-y-2 text-sm">
@@ -480,8 +545,8 @@ class Agent:
         </div>
       </section>
 
-      {/* ───────── 10. Risques & cyber‑sécurité */}
-      <section ref={(el) => (sectionRefs.current[10] = el)} className="snap-section bg-gray-50 py-12">
+      {/* ───────── 9. Risques & cyber‑sécurité */}
+      <section ref={(el) => (sectionRefs.current[9] = el)} className="snap-section bg-gray-50 py-12">
         <div className="container mx-auto max-w-5xl px-4 md:px-6 space-y-6">
           <h2 className="text-3xl font-bold">Risques & cyber‑sécurité</h2>
           <p>Les SMA LLM exposent des vulnérabilités telles que prompt‑injection croisée ou fuites de mémoire partagée. Des incidents récents soulignent la nécessité d'une défense multi‑agent.</p>
@@ -493,8 +558,8 @@ class Agent:
         </div>
       </section>
 
-      {/* ───────── 11. Impacts socio‑économiques */}
-      <section ref={(el) => (sectionRefs.current[11] = el)} className="snap-section bg-white py-12">
+      {/* ───────── 10. Impacts socio‑économiques */}
+      <section ref={(el) => (sectionRefs.current[10] = el)} className="snap-section bg-white py-12">
         <div className="container mx-auto max-w-5xl px-4 md:px-6 space-y-6">
           <h2 className="text-3xl font-bold">Impacts socio‑économiques</h2>
           <ul className="list-disc pl-5 space-y-2 text-sm">
@@ -506,8 +571,8 @@ class Agent:
         </div>
       </section>
 
-      {/* ───────── 12. Perspectives futures (2025‑2030) */}
-      <section ref={(el) => (sectionRefs.current[12] = el)} className="snap-section bg-gray-50 py-12">
+      {/* ───────── 11. Perspectives futures (2025‑2030) */}
+      <section ref={(el) => (sectionRefs.current[11] = el)} className="snap-section bg-gray-50 py-12">
         <div className="container mx-auto max-w-5xl px-4 md:px-6 space-y-6">
           <h2 className="text-3xl font-bold">Perspectives futures (2025‑2030)</h2>
           <ol className="list-decimal pl-6 space-y-2 text-sm">
@@ -515,6 +580,19 @@ class Agent:
             <li>Intégration des agents physiques — convergence IA‑robotique.</li>
             <li>Gouvernance des intelligences collectives à grande échelle.</li>
             <li>Redéfinition des emplois et de la productivité.</li>
+          </ol>
+        </div>
+      </section>
+
+      {/* ───────── 12. REco& roadmap */}
+      <section ref={(el) => (sectionRefs.current[11] = el)} className="snap-section bg-gray-50 py-12">
+        <div className="container mx-auto max-w-5xl px-4 md:px-6 space-y-6">
+          <h2 className="text-3xl font-bold">Recommandations & roadmap</h2>
+          <ol className="list-decimal pl-6 space-y-2 text-sm">
+            <li>Pilotage : Mise en place de structures de gouvernance claires.</li>
+            <li>POC : Développement de preuves de concept pour tester les applications.</li>
+            <li>KPI : Définition d'indicateurs de performance pertinents.</li>
+            <li>Formation : Renforcement des compétences des équipes.(arXiv)</li>
           </ol>
         </div>
       </section>

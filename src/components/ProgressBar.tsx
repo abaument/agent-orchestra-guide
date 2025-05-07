@@ -96,7 +96,7 @@ const getTooltipDescription = (index: number): string => {
     case 12:
       return "Pilotage, POC, KPI, gouvernance, formation.";
     case 13:
-      return "Testez l'IARIIG";
+      return "Testez l'IA'RIIG";
     default:
       return "Cliquez pour naviguer vers cette section";
   }
