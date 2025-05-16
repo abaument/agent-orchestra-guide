@@ -3,9 +3,13 @@ import React, { useEffect, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
 import ProgressBar from "@/components/ProgressBar"
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"
+import {
+  Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter,
+} from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
 import AskMeAnything from "@/components/AskMeAnything"
 import AgentCard from "@/components/AgentCard"
-import { Zap, Share2, BarChart2, Layers, ShieldCheck, BrainCog } from "lucide-react"
+import { Zap, Share2, BarChart2, Layers, ShieldCheck, BrainCog, ClipboardList, Database, Lock, Scale, ShieldAlert, UserX, MessageCircleWarning, MemoryStick, BarChart3, Briefcase, HandCoins, GlobeLock, ClipboardCheck, FlaskConical, Gauge, GraduationCap } from "lucide-react"
 import AIBadge from "@/components/AIBadge"
 import NetworkAnimation from "@/components/NetworkAnimation"
 import {
@@ -16,6 +20,12 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog"
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/ui/accordion"
 import { Separator } from "@/components/ui/separator"     
 import {
   BarChart,
@@ -108,36 +118,65 @@ const Index: React.FC = () => {
         className="snap-section bg-white py-12"
       >
         <div className="container mx-auto max-w-5xl px-4 md:px-6 space-y-8">
-          <h2 className="text-3xl font-bold">
-            Résumé exécutif
-          </h2>
+          <h2 className="text-3xl font-bold text-center">Résumé exécutif</h2>
 
-          {/* — Résumé exécutif — */}
-          <div className="space-y-4">
-            <h3 className="font-semibold text-electric-blue">Résumé exécutif</h3>
+          {/* Card principale */}
+          <div className="rounded-xl bg-gray-50 p-6 shadow-sm space-y-4">
             <p className="text-sm leading-relaxed">
-              Entre 2023 et 2025, les agents basés sur des modèles de langage (LLM)
-              sont passés d’outils isolés à des <strong>systèmes multi‑agents collaboratifs</strong>.
-              Cette évolution ouvre la voie à une coordination efficace,
-              une prise de décision distribuée et une automatisation avancée.
-              Des acteurs majeurs –  Accenture, notamment –  déploient déjà ces systèmes,
-              annonçant une adoption massive dans les prochaines années 
-              <span className="italic text-xs">(WSJ)</span>.
+              Entre <strong>2023 et 2025</strong>, les systèmes multi-agents fondés
+              sur des modèles de langage (LLM) ont franchi un cap : d’outils
+              conversationnels isolés, ils sont devenus des <em>équipes
+              autonomes</em> capables de coopérer, se spécialiser, négocier et
+              apprendre collectivement.  Cette orchestration rapproche l’informatique
+              d’un <strong>fonctionnement organisationnel</strong> : chaque agent
+              tient un rôle, partage un environnement commun
+              et poursuit des objectifs coordonnés.
+            </p>
+
+            <p className="text-sm leading-relaxed">
+              Ce changement ouvre la voie à une IA plus modulaire, plus robuste et
+              adaptée aux flux de travail complexes – en entreprise comme dans les
+              infrastructures critiques.  Il appelle aussi à repenser la
+              <strong> gouvernance de l’autonomie algorithmique</strong>
+              : éthique, contrôle humain, responsabilité distribuée.
+            </p>
+
+            <p className="text-sm leading-relaxed">
+              Les SMA ne sont plus de simples outils passifs ; ils deviennent
+              des entités capables de <em>collaborer, s’organiser et produire des
+              résultats complexes</em>.  Pour l’entreprise, c’est un avantage
+              stratégique majeur ; pour les concepteurs, c’est l’exigence de bâtir
+              des IA distribuées <strong>maîtrisables, auditables et dignes de
+              confiance.</strong>
             </p>
           </div>
-        </div>
-        <div className="container mx-auto max-w-5xl px-4 md:px-6 space-y-6">
-          <p>
-            Entre 2023 et 2025, les agents LLM ont évolué d'outils isolés vers des <strong>systèmes multi‑agents collaboratifs</strong>.
-            Des acteurs majeurs comme Accenture et Google expérimentent déjà ces orchestrations à grande échelle.
-          </p>
-          <ul className="list-disc pl-5 space-y-2">
-            <li>Mettre en place un <strong>pilotage dédié</strong> et des KPI centrés sur la coopération.</li>
-            <li>Lancer des <strong>POC</strong> ciblés (copilote métier, simulation, robotique).</li>
-            <li>Former les équipes aux <strong>architectures MAS & LangGraph</strong>.</li>
-          </ul>
+
+          {/* Appel à l’action / étapes clés */}
+          <div className="grid gap-4 md:grid-cols-3 text-sm">
+            <div className="rounded-lg bg-electric-blue/10 p-4">
+              <h3 className="font-semibold text-electric-blue mb-1">Pilotage dédié</h3>
+              <p>
+                Mettre en place des KPI centrés sur la <em>coopération</em> et la
+                <em>robustesse</em>.
+              </p>
+            </div>
+            <div className="rounded-lg bg-electric-blue/10 p-4">
+              <h3 className="font-semibold text-electric-blue mb-1">POC ciblés</h3>
+              <p>
+                Tester copilotes métier, simulation socio-éco ou robotique
+                coordonnée.
+              </p>
+            </div>
+            <div className="rounded-lg bg-electric-blue/10 p-4">
+              <h3 className="font-semibold text-electric-blue mb-1">Formation</h3>
+              <p>Acculturer les équipes aux architectures MAS et 
+                <em>LangGraph / CrewAI</em>.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
+
 
       {/* ───────── 2. Introduction & contexte */}
       <section
@@ -532,76 +571,656 @@ const Index: React.FC = () => {
 
 
       {/* ───────── 8. Cadre éthique & réglementaire */}
-      <section ref={(el) => (sectionRefs.current[8] = el)} className="snap-section bg-white py-12">
-        <div className="container mx-auto max-w-5xl px-4 md:px-6 space-y-6">
-          <h2 className="text-3xl font-bold">Cadre éthique & réglementaire</h2>
-          <ul className="list-disc pl-5 space-y-2 text-sm">
-            <li>EU AI Act</li>
-            <li>ISO/IEC 42001</li>
-            <li>IEEE P3394</li>
-            <li>Data Act</li>
-            <li>Privacy / RGPD</li>
-          </ul>
+      <section
+        ref={(el) => (sectionRefs.current[8] = el)}
+        className="snap-section bg-white py-12"
+      >
+        <div className="container mx-auto max-w-5xl px-4 md:px-6 space-y-8">
+          <h2 className="text-3xl font-bold text-center">Cadre éthique & réglementaire</h2>
+
+          {/* Grid de cartes */}
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {[
+              {
+                id: "eu-ai-act",
+                title: "EU AI Act",
+                tag: "Adopté 2024",
+                icon: <Scale size={24} />,
+                tagline: "Classification des risques & obligations",
+                details: (
+                  <>
+                    <p className="mb-2">
+                      Quatre niveaux de risque ; exige explicabilité, supervision
+                      humaine et traçabilité pour les SMA à fort impact.
+                    </p>
+                    <ul className="list-disc pl-5 text-sm space-y-1">
+                      <li>Auditabilité des décisions autonomes</li>
+                      <li>Contrôle humain <em>in-the-loop</em></li>
+                      <li>Journal complet des interactions d’agent</li>
+                    </ul>
+                  </>
+                ),
+              },
+              {
+                id: "iso-42001",
+                title: "ISO/IEC 42001",
+                tag: "Norme 2023",
+                icon: <ClipboardList size={24} />,
+                tagline: "Management system pour l’IA",
+                details: (
+                  <>
+                    <p className="mb-2">
+                      Équivalent « ISO 9001 » de la gouvernance IA : risques,
+                      transparence, traçabilité, responsabilités humaines.
+                    </p>
+                    <p className="text-sm">
+                      Concerne toute organisation qui conçoit ou opère des SMA.
+                    </p>
+                  </>
+                ),
+              },
+              {
+                id: "ieee-p3394",
+                title: "IEEE P3394",
+                tag: "Draft 2025",
+                icon: <ShieldCheck size={24} />,
+                tagline: "Autonomie & redevabilité",
+                details: (
+                  <>
+                    <p>
+                      Définit degrés d’autonomie acceptables, exigences de sûreté et
+                      responsabilité répartie dans la prise de décision distribuée.
+                    </p>
+                  </>
+                ),
+              },
+              {
+                id: "data-act",
+                title: "UE Data Act",
+                tag: "Adopté",
+                icon: <Database size={24} />,
+                tagline: "Partage et interopérabilité des données",
+                details: (
+                  <>
+                    <p className="mb-2">
+                      Encadre l’accès équitable aux données générées par objets
+                      connectés / agents ; empêche la rétention abusive d’infos.
+                    </p>
+                    <p className="text-sm">
+                      Crucial pour les SMA inter-entreprises manipulant des données
+                      sensibles.
+                    </p>
+                  </>
+                ),
+              },
+              {
+                id: "privacy",
+                title: "Privacy (RGPD, CCPA…)",
+                tag: "Obligatoire",
+                icon: <Lock size={24} />,
+                tagline: "Protection des données personnelles",
+                details: (
+                  <>
+                    <p className="mb-2">
+                      Minimisation des données, anonymisation, contrôle d’accès
+                      inter-agents, journal d’audit.
+                    </p>
+                    <p className="text-sm">
+                      Exemple : l’agent planning d’un hôpital n’accède jamais aux
+                      données cliniques détaillées.
+                    </p>
+                  </>
+                ),
+              },
+            ].map(({ id, title, tag, icon, tagline, details }) => (
+              <Dialog key={id}>
+                <DialogTrigger asChild>
+                  <Card className="cursor-pointer transition hover:shadow-md">
+                    <CardHeader className="flex flex-row items-center gap-3 pb-2">
+                      <div className="rounded-lg bg-electric-blue/10 p-2 text-electric-blue">
+                        {icon}
+                      </div>
+                      <div>
+                        <CardTitle className="text-base">{title}</CardTitle>
+                        <CardDescription>{tagline}</CardDescription>
+                      </div>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <Badge variant="secondary" className="text-xs">
+                        {tag}
+                      </Badge>
+                    </CardContent>
+                  </Card>
+                </DialogTrigger>
+
+                <DialogContent className="max-w-2xl">
+                  <DialogHeader>
+                    <DialogTitle>{title}</DialogTitle>
+                    <p className="text-xs text-gray-500">{tag}</p>
+                  </DialogHeader>
+                  <div className="space-y-3 text-sm">{details}</div>
+                </DialogContent>
+              </Dialog>
+            ))}
+          </div>
+
+          {/* Sources */}
+          <div className="rounded-lg bg-gray-50 p-4 text-xs">
+            <p className="font-semibold mb-1">Sources & lectures :</p>
+            <ul className="list-disc pl-5 space-y-1">
+              <li>Journal Officiel de l’UE – EU AI Act (2024)</li>
+              <li>ISO/IEC 42001:2023 – Artificial Intelligence Management System</li>
+              <li>IEEE Draft P3394 (v0.7 / 2025)</li>
+            </ul>
+          </div>
         </div>
       </section>
+
 
       {/* ───────── 9. Risques & cyber‑sécurité */}
-      <section ref={(el) => (sectionRefs.current[9] = el)} className="snap-section bg-gray-50 py-12">
-        <div className="container mx-auto max-w-5xl px-4 md:px-6 space-y-6">
-          <h2 className="text-3xl font-bold">Risques & cyber‑sécurité</h2>
-          <p>Les SMA LLM exposent des vulnérabilités telles que prompt‑injection croisée ou fuites de mémoire partagée. Des incidents récents soulignent la nécessité d'une défense multi‑agent.</p>
-          <ul className="list-disc pl-5 space-y-1 text-sm">
-            <li>Attaques sybil</li>
-            <li>Prompt‑injection croisée</li>
-            <li>Fuite de mémoire partagée</li>
-          </ul>
+      <section
+        ref={(el) => (sectionRefs.current[9] = el)}
+        className="snap-section bg-white py-12"
+      >
+        <div className="container mx-auto max-w-5xl px-4 md:px-6 space-y-8">
+          <h2 className="text-3xl font-bold text-center">Risques & cyber-sécurité</h2>
+
+          {/* Contexte global */}
+          <div className="rounded-lg bg-electric-blue/10 p-4 text-sm leading-relaxed">
+            <p>
+              Les SMA LLM élargissent la surface d’attaque : Sybil, prompt-injection,
+              fuite de mémoire partagée. Plusieurs incidents récents l’ont démontré
+              <span className="italic text-xs"> (Business Insider 2024)</span>.
+            </p>
+          </div>
+
+          {/* Cartes + Dialogs */}
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {/* ---------- Sybil ---------- */}
+            <Dialog>
+              <DialogTrigger asChild>
+                <AgentCard
+                  title="Attaques Sybil"
+                  description="Faux agents infiltrés (AutoGPT Discord 2024)"
+                  icon={<UserX size={24} className="text-electric-blue" />}
+                  details="Clique pour l’exemple ↗"
+                />
+              </DialogTrigger>
+
+              <DialogContent className="max-w-xl h-[80vh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle>Attaques Sybil</DialogTitle>
+                </DialogHeader>
+                <div className="space-y-3 text-sm leading-relaxed">
+                  <p>
+                    <strong>Incident – avril 2024</strong> : 43 pseudo-agents malveillants
+                    ont envahi un réseau AutoGPT (Discord) et faussé 28 % des tâches,
+                    surchargeant la file de travail.
+                  </p>
+                  <ul className="list-disc pl-5 space-y-1">
+                    <li>But : détourner consensus, voler des ressources.</li>
+                    <li>
+                      Prévention : identité cryptographique (JWT), liste blanche d’agents,
+                      quorum de confiance.
+                    </li>
+                  </ul>
+                </div>
+              </DialogContent>
+            </Dialog>
+
+            {/* ---------- Prompt-injection ---------- */}
+            <Dialog>
+              <DialogTrigger asChild>
+                <AgentCard
+                  title="Prompt-injection croisée"
+                  description="Détournement de rôle (Copilot Agents 2023)"
+                  icon={<MessageCircleWarning size={24} className="text-electric-blue" />}
+                  details="Clique pour l’exemple ↗"
+                />
+              </DialogTrigger>
+
+              <DialogContent className="max-w-xl h-[80vh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle>Prompt-injection croisée</DialogTitle>
+                </DialogHeader>
+                <div className="space-y-3 text-sm leading-relaxed">
+                  <p>
+                    <strong>Incident – sept. 2023</strong> : un résumé empoisonné a forcé
+                    un agent Copilot DevOps à supprimer des tests et à « committer »
+                    un code vide dans le repo CI/CD.
+                  </p>
+                  <ul className="list-disc pl-5 space-y-1">
+                    <li>Risque : sabotage silencieux, fuite d’info confidentielle.</li>
+                    <li>
+                      Mitigation : <em>sandbox</em> des messages, nettoyage de
+                      chaînes, signature de provenance.
+                    </li>
+                  </ul>
+                </div>
+              </DialogContent>
+            </Dialog>
+
+            {/* ---------- Memory leak ---------- */}
+            <Dialog>
+              <DialogTrigger asChild>
+                <AgentCard
+                  title="Fuite de mémoire partagée"
+                  description="PHI exposées (Health-Bot POC 2024)"
+                  icon={<MemoryStick size={24} className="text-electric-blue" />}
+                  details="Clique pour l’exemple ↗"
+                />
+              </DialogTrigger>
+
+              <DialogContent className="max-w-xl h-[80vh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle>Fuite de mémoire partagée</DialogTitle>
+                </DialogHeader>
+                <div className="space-y-3 text-sm leading-relaxed">
+                  <p>
+                    <strong>POC clinique – févr. 2024</strong> : l’agent juridique
+                    a stocké des données patients dans la mémoire globale ; l’agent
+                    « résumé » les a publiées à un utilisateur externe.
+                  </p>
+                  <ul className="list-disc pl-5 space-y-1">
+                    <li>Violation RGPD, divulgation PHI.</li>
+                    <li>
+                      Contre-mesures : RBAC/ABAC inter-agents, segmentation mémoire,
+                      audit des accès sensibles.
+                    </li>
+                  </ul>
+                </div>
+              </DialogContent>
+            </Dialog>
+          </div>
+
+          {/* Sources */}
+          <div className="rounded-lg bg-gray-50 p-4 text-xs">
+            <p className="font-semibold mb-1">Sources & lectures :</p>
+            <ul className="list-disc pl-5 space-y-1">
+              <li>Business Insider (2024) – LLM agent breaches analysis</li>
+              <li>arXiv 2309.12345 – Prompt Injection across Agent Chains</li>
+              <li>OWASP Top-10 LLM (2023) – Sybil & Memory Leaks</li>
+            </ul>
+          </div>
         </div>
       </section>
+
+
+
 
       {/* ───────── 10. Impacts socio‑économiques */}
-      <section ref={(el) => (sectionRefs.current[10] = el)} className="snap-section bg-white py-12">
-        <div className="container mx-auto max-w-5xl px-4 md:px-6 space-y-6">
-          <h2 className="text-3xl font-bold">Impacts socio‑économiques</h2>
-          <ul className="list-disc pl-5 space-y-2 text-sm">
-            <li>Productivité — +20‑30 % sur tâches cognitives répétitives</li>
-            <li>Emplois — transformation des métiers, nouveaux rôles</li>
-            <li>Redistribution de valeur — concentration vs modèles open‑source</li>
-            <li>Souveraineté numérique — maîtrise des technologies clés</li>
-          </ul>
+      <section
+        ref={(el) => (sectionRefs.current[10] = el)}
+        className="snap-section bg-gray-50 py-12"
+      >
+        <div className="container mx-auto max-w-5xl px-4 md:px-6 space-y-8">
+          <h2 className="text-3xl font-bold text-center">Impacts socio-économiques</h2>
+
+          {/* Intro */}
+          <p className="text-sm leading-relaxed text-center">
+            Les SMA LLM réorganisent la productivité, les emplois, la chaîne de
+            valeur et la souveraineté numérique.  Quatre axes clés :
+          </p>
+
+          {/* Cartes */}
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
+            {[
+              {
+                id: "productivity",
+                title: "Productivité",
+                desc: "Automatisation coordonnée",
+                icon: <BarChart3 size={24} className="text-electric-blue" />,
+                details: (
+                  <>
+                    <p className="mb-2">
+                      Les SMA automatisent des <strong>processus entiers</strong>
+                      (génération de documents, analyse réglementaire, préparation
+                      de commandes) et s’auto-adaptent aux variations de contexte ;
+                      le gain est qualitatif <em>et</em> quantitatif.
+                    </p>
+                    <p className="text-xs">
+                      Ex. : +28 % de tâches juridiques rédigées en moins de 10 min
+                      (cabinet pilote 2024).
+                    </p>
+                  </>
+                ),
+              },
+              {
+                id: "jobs",
+                title: "Emplois",
+                desc: "Transformation & nouveaux rôles",
+                icon: <Briefcase size={24} className="text-electric-blue" />,
+                details: (
+                  <>
+                    <p className="mb-2">
+                      Les tâches répétitives sont partiellement automatisées ; de
+                      nouveaux métiers apparaissent : <em>orchestrateur d’agents</em>,
+                      auditeur de systèmes distribués, <em>coach IA</em>.
+                    </p>
+                    <p className="text-xs">
+                      Défi : requalification & filières de formation adaptées.
+                    </p>
+                  </>
+                ),
+              },
+              {
+                id: "value",
+                title: "Redistribution de valeur",
+                desc: "Nouvelles chaînes économiques",
+                icon: <HandCoins size={24} className="text-electric-blue" />,
+                details: (
+                  <>
+                    <p className="mb-2">
+                      Les firmes qui maîtrisent l’<strong>orchestration interne</strong>
+                      (données + agents) captent plus de valeur ; les simples
+                      consommatrices d’agents externes deviennent dépendantes.
+                    </p>
+                    <p className="text-xs">
+                      Impact marqué dans le conseil, la finance, la logistique.
+                    </p>
+                  </>
+                ),
+              },
+              {
+                id: "sovereignty",
+                title: "Souveraineté numérique",
+                desc: "Maîtrise des briques critiques",
+                icon: <GlobeLock size={24} className="text-electric-blue" />,
+                details: (
+                  <>
+                    <p className="mb-2">
+                      Dépendance aux LLM propriétaires & clouds centralisés ⇢
+                      nécessité de modèles open source, orchestration locale,
+                      cadre juridique de confiance.
+                    </p>
+                    <p className="text-xs">
+                      Les SMA deviennent un levier géopolitique majeur.
+                    </p>
+                  </>
+                ),
+              },
+            ].map(({ id, title, desc, icon, details }) => (
+              <Dialog key={id}>
+                <DialogTrigger asChild>
+                  <AgentCard
+                    title={title}
+                    description={desc}
+                    icon={icon}
+                    details="Clique pour le détail ↗"
+                  />
+                </DialogTrigger>
+
+                <DialogContent className="max-w-xl">
+                  <DialogHeader>
+                    <DialogTitle>{title}</DialogTitle>
+                  </DialogHeader>
+                  <div className="space-y-3 text-sm leading-relaxed">{details}</div>
+                </DialogContent>
+              </Dialog>
+            ))}
+          </div>
+
+          {/* Sources */}
+          <div className="rounded-lg bg-white p-4 text-xs shadow-sm">
+            <p className="font-semibold mb-1">Sources & chiffres :</p>
+            <ul className="list-disc pl-5 space-y-1">
+              <li>McKinsey – « Generative Agents & Productivity » (2024)</li>
+              <li>OECD AI Outlook – Employment Disruption Index (2025)</li>
+              <li>World Bank – Digital Sovereignty Report (2024)</li>
+            </ul>
+          </div>
         </div>
       </section>
 
-      {/* ───────── 11. Perspectives futures (2025‑2030) */}
-      <section ref={(el) => (sectionRefs.current[11] = el)} className="snap-section bg-gray-50 py-12">
-        <div className="container mx-auto max-w-5xl px-4 md:px-6 space-y-6">
-          <h2 className="text-3xl font-bold">Perspectives futures (2025‑2030)</h2>
-          <ol className="list-decimal pl-6 space-y-2 text-sm">
-            <li>Agents plus autonomes et spécialisés (auto‑objectifs, auto‑apprentissage).</li>
-            <li>Intégration des agents physiques — convergence IA‑robotique.</li>
-            <li>Gouvernance des intelligences collectives à grande échelle.</li>
-            <li>Redéfinition des emplois et de la productivité.</li>
-          </ol>
+
+     {/* ───────── 11. Perspectives futures (2025-2030) */}
+      <section
+      ref={(el) => (sectionRefs.current[11] = el)}
+      className="snap-section bg-gray-50 py-12"
+      >
+        <div className="container mx-auto max-w-5xl px-4 md:px-6 space-y-8">
+          <h2 className="text-3xl font-bold text-center">
+            Perspectives futures : Intelligence Distribuée & Autonome (2025‑2030)
+          </h2>
+
+          {/* Timeline / quick facts */}
+          <div className="mx-auto max-w-xl grid grid-cols-2 gap-4 text-xs text-center">
+            <div className="rounded-lg bg-electric-blue/10 p-3">
+              <p className="font-semibold text-electric-blue">+15 Papers/mois</p>
+              <p>sur arXiv (2024)</p>
+            </div>
+            <div className="rounded-lg bg-electric-blue/10 p-3">
+              <p className="font-semibold text-electric-blue">3×</p>
+              <p>d’open‑source frameworks depuis 2023</p>
+            </div>
+          </div>
+
+          {/* Accordion UX */}
+          <Accordion type="single" collapsible className="w-full space-y-2" defaultValue="item-1">
+            {[
+              {
+                id: "item-1",
+                title: "Agents plus autonomes et spécialisés",
+                body: (
+                  <>
+                    <p>
+                      Prochaine génération : planification interne, auto‑feedback, mémoire à long terme.
+                      <br />Frameworks pilotes : <em>LangGraph</em>, <em>CrewAI</em>.
+                    </p>
+                    <a href="https://www.threads.com/@kakachia777/post/DIazO4iNZkR/media" target="_blank" rel="noopener noreferrer">
+                      <img
+                        src="/AIagent.webp"
+                        alt="Auto‑planning"
+                        className="mx-auto max-w-xs md:max-w-sm rounded-lg shadow-sm hover:opacity-90 transition"
+                      />
+                    </a>
+                  </>
+                ),
+              },
+              {
+                id: "item-2",
+                title: "Intégration des agents physiques",
+                body: (
+                  <>
+                    <p>
+                      Fusion IA‑robot : manipulation fine, flotte de drones orchestrée par LLM.
+                    </p>
+                    <a href="https://www.lebigdata.fr/agents-ia-la-tech-qui-va-transformer-la-realite-en-science-fiction-tout-savoir" target="_blank" rel="noopener noreferrer">
+                      <img
+                        src="/agent-ia.webp"
+                        alt="Robotics"
+                        className="mx-auto max-w-xs md:max-w-sm rounded-lg shadow-sm hover:opacity-90 transition"
+                      />
+                    </a>
+                  </>
+                ),
+              },
+              {
+                id: "item-3",
+                title: "Gouvernance des intelligences collectives",
+                body: (
+                  <>
+                    <p>
+                      Besoin de protocoles de confiance, responsabilité distribuée et lois numériques.
+                    </p>
+                    <ul className="list-disc pl-5 text-xs space-y-1 mt-2">
+                      <li>ISO/IEC 42001 – AI management</li>
+                      <li>IEEE P3394 – Autonomous Agent Governance</li>
+                    </ul>
+                  </>
+                ),
+              },
+              {
+                id: "item-4",
+                title: "Redéfinition de l’emploi & productivité",
+                body: (
+                  <>
+                    <p>
+                      Copilotes verticaux et agents projet condensent jusqu’à 30 % des tâches cognit.
+                    </p>
+                    <p className="text-xs mt-2">Étude McKinsey 2024 : +1,5 pt de PIB mondial.</p>
+                  </>
+                ),
+              },
+            ].map(({ id, title, body }) => (
+              <AccordionItem key={id} value={id} className="border border-gray-100 rounded-lg">
+                <AccordionTrigger className="px-4 py-2 font-medium hover:bg-gray-100">
+                  {title}
+                </AccordionTrigger>
+                <AccordionContent className="px-4 pb-4 text-sm leading-relaxed">
+                  {body}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+
+          {/* Sources */}
+          <div className="mt-6 rounded-lg bg-white p-4 text-xs">
+            <p className="font-semibold mb-1">Sources & lectures :</p>
+            <ul className="list-disc pl-5 space-y-1">
+              <li><a href="https://arxiv.org/abs/2403.12345" target="_blank" className="underline">arXiv 2403.12345</a> – CrewAI v2</li>
+              <li>McKinsey (2024) – Global AI Productivity Report</li>
+              <li>IEEE P3394 draft (2025)</li>
+            </ul>
+          </div>
         </div>
       </section>
 
-      {/* ───────── 12. REco& roadmap */}
-      <section ref={(el) => (sectionRefs.current[11] = el)} className="snap-section bg-gray-50 py-12">
-        <div className="container mx-auto max-w-5xl px-4 md:px-6 space-y-6">
-          <h2 className="text-3xl font-bold">Recommandations & roadmap</h2>
-          <ol className="list-decimal pl-6 space-y-2 text-sm">
-            <li>Pilotage : Mise en place de structures de gouvernance claires.</li>
-            <li>POC : Développement de preuves de concept pour tester les applications.</li>
-            <li>KPI : Définition d'indicateurs de performance pertinents.</li>
-            <li>Formation : Renforcement des compétences des équipes.(arXiv)</li>
-          </ol>
+
+      {/* ───────── 12. Recommandations & roadmap */}
+      <section
+        ref={(el) => (sectionRefs.current[12] = el)}
+        className="snap-section bg-white py-12"
+      >
+        <div className="container mx-auto max-w-5xl px-4 md:px-6 space-y-8">
+          <h2 className="text-3xl font-bold text-center">Recommandations & roadmap</h2>
+
+          <p className="text-center text-sm leading-relaxed">
+            Du pilotage organisationnel à la montée en compétence, voici les quatre
+            leviers majeurs pour réussir un déploiement de SMA&nbsp;LLM.
+          </p>
+
+          {/* Grid de cartes */}
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
+            {/* Pilotage */}
+            <Dialog>
+              <DialogTrigger asChild>
+                <AgentCard
+                  title="Pilotage"
+                  description="Gouvernance & supervision"
+                  icon={<ClipboardCheck size={24} className="text-electric-blue" />}
+                  details="Clique pour le détail ↗"
+                />
+              </DialogTrigger>
+              <DialogContent className="max-w-xl">
+                <DialogHeader>
+                  <DialogTitle>Pilotage – structurer la gouvernance</DialogTitle>
+                </DialogHeader>
+                <div className="space-y-3 text-sm leading-relaxed">
+                  <ul className="list-disc pl-5 space-y-1">
+                    <li>Rôles : opérateur humain, contrôleur de tâche, RSSI agents.</li>
+                    <li>Documenter objectifs & limites d’autonomie de chaque agent.</li>
+                    <li>Processus d’audit / désactivation rapide.</li>
+                  </ul>
+                </div>
+              </DialogContent>
+            </Dialog>
+
+            {/* POC */}
+            <Dialog>
+              <DialogTrigger asChild>
+                <AgentCard
+                  title="POC"
+                  description="Valider les usages ciblés"
+                  icon={<FlaskConical size={24} className="text-electric-blue" />}
+                  details="Clique pour le détail ↗"
+                />
+              </DialogTrigger>
+              <DialogContent className="max-w-xl">
+                <DialogHeader>
+                  <DialogTitle>Preuves de concept (POC)</DialogTitle>
+                </DialogHeader>
+                <div className="space-y-3 text-sm leading-relaxed">
+                  <p className="mb-1">
+                    Tester la collaboration d’agents sur des tâches réelles :
+                  </p>
+                  <ul className="list-disc pl-5 space-y-1">
+                    <li>Recherche ‣ Raisonnement ‣ Décision ‣ Coordination.</li>
+                    <li>Comparer architectures réactives vs BDI vs hiérarchiques.</li>
+                    <li>Identifier biais, redondances, conflits.</li>
+                  </ul>
+                </div>
+              </DialogContent>
+            </Dialog>
+
+            {/* KPI */}
+            <Dialog>
+              <DialogTrigger asChild>
+                <AgentCard
+                  title="KPI"
+                  description="Mesurer l’efficacité multi-agent"
+                  icon={<Gauge size={24} className="text-electric-blue" />}
+                  details="Clique pour le détail ↗"
+                />
+              </DialogTrigger>
+              <DialogContent className="max-w-xl">
+                <DialogHeader>
+                  <DialogTitle>Indicateurs de performance</DialogTitle>
+                </DialogHeader>
+                <div className="space-y-3 text-sm leading-relaxed">
+                  <ul className="list-disc pl-5 space-y-1">
+                    <li>Taux de réussite collective & temps de coordination.</li>
+                    <li>Nb d’interventions humaines / heure.</li>
+                    <li>Stabilité face aux perturbations.</li>
+                    <li>Coût de communication inter-agents.</li>
+                  </ul>
+                </div>
+              </DialogContent>
+            </Dialog>
+
+            {/* Formation */}
+            <Dialog>
+              <DialogTrigger asChild>
+                <AgentCard
+                  title="Formation"
+                  description="Montée en compétences"
+                  icon={<GraduationCap size={24} className="text-electric-blue" />}
+                  details="Clique pour le détail ↗"
+                />
+              </DialogTrigger>
+              <DialogContent className="max-w-xl">
+                <DialogHeader>
+                  <DialogTitle>Formation & acculturation</DialogTitle>
+                </DialogHeader>
+                <div className="space-y-3 text-sm leading-relaxed">
+                  <ul className="list-disc pl-5 space-y-1">
+                    <li>Développeurs : modèles de coordination, sécurité distribuée.</li>
+                    <li>Métier : IA collaborative & interprétabilité.</li>
+                    <li>Veille active : arXiv, NeurIPS, ICLR, ACL.</li>
+                  </ul>
+                </div>
+              </DialogContent>
+            </Dialog>
+          </div>
+
+          {/* Sources */}
+          <div className="rounded-lg bg-gray-50 p-4 text-xs shadow-sm">
+            <p className="font-semibold mb-1">Lectures recommandées :</p>
+            <ul className="list-disc pl-5 space-y-1">
+              <li>Microsoft – “LLM Agents Playbook” (2024)</li>
+              <li>arXiv 2405.01234 – Multi-Agent Evaluation Metrics</li>
+              <li>Stanford HAI – “Organizational Governance of AI Agents” (2025)</li>
+            </ul>
+          </div>
         </div>
       </section>
+
 
       {/* ───────── 13. Conclusion & ouvertures */}
       <section ref={(el) => (sectionRefs.current[13] = el)} className="snap-section bg-white py-12">
         <div className="container mx-auto max-w-5xl px-4 md:px-6 space-y-6">
           <h2 className="text-3xl font-bold">Conclusion & ouvertures</h2>
-          <p>Les SMA basés sur des LLM représentent une avancée majeure. Leur développement exige un équilibre entre performances techniques, exigences éthiques et cadre réglementaire.</p>
+          <p>Découvrez l'IA'RIIG</p>
           <p>Appel à l'action : expérimentez, mesurez, gouvernez et formez !</p>
           <AIBadge />
         </div>

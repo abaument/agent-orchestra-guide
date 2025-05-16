@@ -23,7 +23,7 @@ app.post(
       const system: Msg = {
         role: "system",
         content:
-          "Tu es Agent‑Orchestra‑Expert, spécialiste des systèmes multi‑agents IA. " +
+          "Tu es Agent‑Orchestra‑Expert, spécialiste des systèmes multi‑agents IA et sur l'IA plus généralement " +
           "Réponds uniquement sur ce sujet. Si la question sort du domaine, " +
           "réponds : « Désolé, je suis spécialisé dans les SMA ».",
       }
